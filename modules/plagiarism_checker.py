@@ -28,16 +28,19 @@ def perform_plagiarism_check(main_class):
 		if filename[0] != '.':
 			file_args += f" {fu.insert_escape_char(filename)}"
 
-	# Change directory to the plagiarism check directory.
-	# This is because if we include a long path, the path will be printed in the results.
-	# This keeps the plag check results much simpler.
-	os.chdir(path.plagiarism_check_dir)
-	os.system(f"../../modules/_PLACE_MOSS_HERE/moss -l java{file_args}")
-	# Change back to original directory.
-	os.chdir(path.cwd)
+	if file_args != "":
+		# Change directory to the plagiarism check directory.
+		# This is because if we include a long path, the path will be printed in the results.
+		# This keeps the plag check results much simpler.
+		os.chdir(path.plagiarism_check_dir)
+		os.system(f"../../modules/_PLACE_MOSS_HERE/moss -l java{file_args}")
+		# Change back to original directory.
+		os.chdir(path.cwd)
 
-	# clear the plag check directory
-	for filename in os.listdir(path.plagiarism_check_dir):
-		if filename[0] != '.':
-			file_path = os.path.join(path.plagiarism_check_dir, fu.insert_escape_char(filename))
-			os.system(f"rm {file_path}")
+		# clear the plag check directory
+		for filename in os.listdir(path.plagiarism_check_dir):
+			if filename[0] != '.':
+				file_path = os.path.join(path.plagiarism_check_dir, fu.insert_escape_char(filename))
+				os.system(f"rm {file_path}")
+	else:
+		print("There are no files to check.")
