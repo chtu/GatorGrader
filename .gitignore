@@ -3,8 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# DS_Store files
 .DS_STORE
 
+# Moss file.
+# Stanford terms state that moss script cannot be made publicly available,
+# so it is ignored by git. People who use this program must get their own
+# free copy of moss.
 moss
 
 # C extensions
