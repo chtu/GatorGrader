@@ -2,7 +2,7 @@ import os
 import subprocess
 
 from modules.main import EvaluatorProgram as evaluator
-from modules.settings import Path as path
+from modules.settings import Path as path, Settings as settings
 import modules.filename_util as fu
 
 def clear_folders_from_dir(dir):
@@ -35,7 +35,8 @@ def copy_to_initial_dir(dir):
 
 def clear_initial_dir():
 	for folder in os.listdir(path.initial_sub_dir):
-		os.system(f"rm -rf {os.path.join(path.initial_sub_dir, folder)}")
+		if folder != settings.placeholder:
+			os.system(f"rm -rf {os.path.join(path.initial_sub_dir, folder)}")
 
 def clear_directories():
 	clear_initial_dir()
@@ -58,6 +59,7 @@ def clear_plag_dir():
 # Run the test
 
 print("Restoring test data...")
+fu.init_storage_dirs()
 clear_directories()
 copy_to_initial_dir(path.test_files_dir)
 

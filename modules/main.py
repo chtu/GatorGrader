@@ -113,6 +113,7 @@ class EvaluatorProgram:
 		main_java_file = main_class + ".java"
 		clear_and_print_header(main_class)
 		print("Beginning program.")
+		fu.init_storage_dirs()
 		print(Design.border4)
 
 		# Validate all of the submissions first
@@ -121,6 +122,8 @@ class EvaluatorProgram:
 
 		for i in range(0, len(all_submission_folders)):
 			submission_folder = all_submission_folders[i]
+			if submission_folder == Settings.placeholder:
+				continue
 			submission_files = remove_hidden(os.listdir(os.path.join(Path.initial_sub_dir, submission_folder)))
 			for file in submission_files:
 				parts = file.split('.')
