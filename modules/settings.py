@@ -57,6 +57,11 @@ class Path:
 	# Test files
 	test_files_dir = os.path.join(storage_dir, "test_files")
 
+	# All storage directories
+	storage_directories = [invalid_dir, valid_sub_dir, valid_checked_dir, valid_checked_graded_dir,
+		unzipped_dir, plagiarism_check_dir, invalid_sub_dir, unzip_fail_dir,
+		invalid_java_file_dir, non_compilable_dir]
+
 class Design:
 	border1 =  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 	border2 =  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
