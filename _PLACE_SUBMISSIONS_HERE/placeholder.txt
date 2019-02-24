@@ -1,0 +1,1 @@
+This is a placeholder because git won't track folders unless there is something in them.
