@@ -1,10 +1,12 @@
 import os
 import subprocess
 from modules.settings import Path, Settings
+import modules.filename_util as fu
+
 
 class SubmissionFile:
 	def __init__(self, filename, path_to_dir, main_class):
-		self.filename = filename # Name of the file, including extension
+		self.filename = fu.insert_escape_char(filename) # Name of the file, including extension
 		self.main_class = main_class
 		# Set the following as None, and then validate.
 		# If validation is successfull, these values will be pulled from the
@@ -16,7 +18,7 @@ class SubmissionFile:
 		self.validate_filename()
 
 		self.column_width = 50
-		self.current_path = os.path.join(path_to_dir, filename)
+		self.current_path = os.path.join(path_to_dir, self.filename)
 
 		self.unzipped = False
 
