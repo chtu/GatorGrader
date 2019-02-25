@@ -18,6 +18,7 @@ class SubmissionFile:
 		self.validate_filename()
 
 		self.column_width = 50
+		self.current_dir = path_to_dir
 		self.current_path = os.path.join(path_to_dir, self.filename)
 
 		self.unzipped = False
@@ -25,6 +26,7 @@ class SubmissionFile:
 	# Set the current location of the file
 	def set_current_path(self, current_directory):
 		self.current_path = os.path.join(current_directory, self.filename)
+		self.current_dir = current_directory
 
 	# Move the file to a new directory.
 	# new_directory_path is the new directory where the file will reside.
@@ -32,7 +34,13 @@ class SubmissionFile:
 	def move(self, new_directory_path):
 		updated_path = os.path.join(new_directory_path, self.filename)
 		os.system('mv ' + self.current_path + ' ' + updated_path)
+		self.current_dir = new_directory_path
 		self.current_path = updated_path
+
+	def rename(self, new_name):
+		dest_path = os.path.join(self.current_dir, new_name)
+		os.system(f"mv {self.current_path} {dest_path}")
+		self.filename = new_name
 
 	def set_user_dir_name(self):
 		if self.first_name != None and self.last_name != None and self.id_number != None:
