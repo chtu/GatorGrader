@@ -20,14 +20,25 @@ def remove_file_if_exists(submission_file):
 			break
 
 class Validator:
-	def validate(submission_file, full_path, main_class):
+	def validate(submission_file, path_to_dir, main_class):
 		remove_file_if_exists(submission_file)
-		sub = SubmissionFile(submission_file, full_path, main_class)
+		sub = SubmissionFile(submission_file, path_to_dir, main_class)
 
 		# Check if the filename is valid.
 		if sub.filename_is_valid():
 			sub.move(Path.valid_sub_dir)
 		else:
+			parts = path_to_dir.split('/')
+			ilearn_sub_dir_parts = parts[len(parts)-1].split('_')
+			student_name = ilearn_sub_dir_parts[0]
+			for i in range(1, len(ilearn_sub_dir_parts)):
+				try:
+					int(ilearn_sub_dir_parts[i])
+					break
+				except:
+					student_name += f"_{ilearn_sub_dir_parts[i]}"
+			new_filename = f"{student_name}__INCORRECT__{sub.filename}"
+			sub.rename(new_filename)
 			sub.move(Path.invalid_sub_dir)
 			return
 
