@@ -41,6 +41,7 @@ class SubmissionFile:
 		dest_path = os.path.join(self.current_dir, new_name)
 		os.system(f"mv {self.current_path} {dest_path}")
 		self.filename = new_name
+		self.current_path = os.path.join(self.current_dir, self.filename)
 
 	def set_user_dir_name(self):
 		if self.first_name != None and self.last_name != None and self.id_number != None:
