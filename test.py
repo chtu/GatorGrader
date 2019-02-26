@@ -16,7 +16,7 @@ def clear_files_from_dir(dir):
 	for filename in os.listdir(dir):
 		if filename[0] == '.':
 			continue
-		path = os.path.join(dir, filename)
+		path = os.path.join(dir, fu.insert_escape_char(filename))
 		os.system(f"rm {path}")
 
 def copy_to_initial_dir(dir):
