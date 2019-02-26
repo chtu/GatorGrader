@@ -2,6 +2,7 @@ import os
 import subprocess
 from modules.settings import Path
 from modules.submission import SubmissionFile
+import modules.filename_util as fu
 
 
 def remove_file_if_exists(submission_file):
@@ -37,7 +38,7 @@ class Validator:
 					break
 				except:
 					student_name += f"_{ilearn_sub_dir_parts[i]}"
-			new_filename = f"{student_name}__INCORRECT__{sub.filename}"
+			new_filename = f"{fu.insert_escape_char(student_name)}__INCORRECT__{sub.filename}"
 			sub.rename(new_filename)
 			sub.move(Path.invalid_sub_dir)
 			return

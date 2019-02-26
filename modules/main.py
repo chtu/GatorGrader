@@ -127,7 +127,7 @@ class EvaluatorProgram:
 			submission_files = remove_hidden(os.listdir(os.path.join(Path.initial_sub_dir, submission_folder)))
 			for file in submission_files:
 				parts = file.split('.')
-				if len(parts) == 2 and parts[1] == "zip":
+				if parts[len(parts)-1] == "zip":
 					path_to_sub_folder = os.path.join(Path.initial_sub_dir, submission_folder)
 					all_submissions.append([file, path_to_sub_folder])
 					break
