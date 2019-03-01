@@ -7,6 +7,8 @@ from modules.submission import SubmissionFile
 from modules.plagiarism_checker import perform_plagiarism_check
 import modules.filename_util as fu
 
+# TODO: Create a test case for testing Well named java file, but lowercase class name
+
 def clear_and_print_header(main_class):
 	subprocess.call('clear')
 	print_header(main_class)
