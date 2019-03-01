@@ -1,6 +1,6 @@
 import os
 import subprocess
-from modules.settings import Path
+from modules.settings import Path, Settings as settings
 from modules.submission import SubmissionFile
 import modules.filename_util as fu
 
@@ -63,7 +63,15 @@ class Validator:
 		try:
 			subprocess.check_call(['javac', java_file_path, '-d', user_dir])
 			os.system(f'echo "Compilation successful." > {compile_info_path}')
+			# Check to make sure there wasn't a package statement in the java
+			# file. If not, then move to invalid and return
+			class_file = f"{main_class}.class"
+			class_file_path = os.path.join(user_dir, class_file)
+			if not os.path.exists(class_file_path):
+				sub.move(Path.package_statement_dir)
+				return
 		except Exception as e:
+			# Error occurred during compilation. Send to invalid
 			sub.move(Path.non_compilable_dir)
 			os.system(f'echo "Compilation failed." > {compile_info_path}')
 
