@@ -96,6 +96,12 @@ def print_invalid_submissions(main_class):
 	print_submission_file_info(Path.invalid_java_file_dir, main_class)
 	print(Design.border3)
 
+	print("JAVA FILES WITH PACKAGE STATEMENTS")
+	print(Design.border4)
+	print("The following submissions were invalid due to one or more of the following reasons:")
+	print("  - The Java file included a package statement when it wasn't supposed to.\n")
+	print_submission_file_info(Path.package_statement_dir, main_class)
+	print(Design.border3)
 
 	print("FAILED TO COMPILE")
 	print(Design.border4)
