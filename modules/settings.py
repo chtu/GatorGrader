@@ -51,8 +51,10 @@ class Path:
 	unzip_fail_dir = os.path.join(invalid_dir, '2_unable_to_unzip')
 	# invalid java file directory
 	invalid_java_file_dir = os.path.join(invalid_dir, '3_invalid_java_file')
+	# submissions with package statements included
+	package_statement_dir = os.path.join(invalid_dir, '4_package_statements_dir')
 	# non-compilable java files directory
-	non_compilable_dir = os.path.join(invalid_dir, '4_unable_to_compile')
+	non_compilable_dir = os.path.join(invalid_dir, '5_unable_to_compile')
 
 	# Test files
 	test_files_dir = os.path.join(storage_dir, "test_files")
@@ -60,7 +62,7 @@ class Path:
 	# All storage directories
 	storage_directories = [invalid_dir, valid_sub_dir, valid_checked_dir, valid_checked_graded_dir,
 		unzipped_dir, plagiarism_check_dir, invalid_sub_dir, unzip_fail_dir,
-		invalid_java_file_dir, non_compilable_dir]
+		invalid_java_file_dir, non_compilable_dir, package_statement_dir]
 
 class Design:
 	border1 =  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
