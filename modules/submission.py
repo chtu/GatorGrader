@@ -140,9 +140,11 @@ class SubmissionFile:
 	# or if the file extension is not "java"
 	def java_file_is_valid(self):
 		if self.unzipped:
-			if os.path.exists(os.path.join(Path.unzipped_dir, self.user_dir_name, f"{self.main_class}.java")):
-				return True
-			else:
-				return False
+			java_file_found = False
+			for file in os.listdir(os.path.join(Path.unzipped_dir, self.user_dir_name)):
+				if file == f"{self.main_class}.java":
+					java_file_found = True
+					break
+			return java_file_found
 		else:
 			print("Not unzipped yet.")
