@@ -15,6 +15,8 @@ def perform_plagiarism_check(main_class):
 			folder_path = os.path.join(path.unzipped_dir, folder)
 			for filename in os.listdir(folder_path):
 				filename_parts = filename.split('.')
+				if len(filename_parts) != 2:
+					continue
 				# Copy Java files over to the plag check directory
 				if filename_parts[1] == "java":
 					src_path = os.path.join(path.unzipped_dir, folder, fu.insert_escape_char(filename))
