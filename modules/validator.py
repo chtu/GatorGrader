@@ -66,10 +66,15 @@ class Validator:
 			# Check to make sure there wasn't a package statement in the java
 			# file. If not, then move to invalid and return
 			class_file = f"{main_class}.class"
-			class_file_path = os.path.join(user_dir, class_file)
-			if not os.path.exists(class_file_path):
+			class_file_found = False
+			for file in os.listdir(user_dir):
+				if file == class_file:
+					class_file_found = True
+					break
+			if not class_file_found:
 				sub.move(Path.package_statement_dir)
 				return
+
 		except Exception as e:
 			# Error occurred during compilation. Send to invalid
 			sub.move(Path.non_compilable_dir)
