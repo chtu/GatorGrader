@@ -3,6 +3,7 @@ import subprocess
 from modules.settings import Path as path
 import modules.filename_util as fu
 
+base_prefix = "__BASE__"
 
 # Uses the MOSS tool offered by Stanford to check similarity among the submissions
 # that at least had a proper zip file and name.
@@ -24,18 +25,33 @@ def perform_plagiarism_check(main_class):
 					dest_path = os.path.join(path.plagiarism_check_dir, new_name)
 					os.system(f"cp {src_path} {dest_path}")
 
+	# Copy all the files from the sample program directory
+	for filename in os.listdir(path.plag_sample_dir):
+		filename_parts = filename.split('.')
+		if len(filename_parts) != 2:
+			continue
+		if filename_parts[1] == "java":
+			src_path = os.path.join(path.plag_sample_dir, filename)
+			new_name = f"{base_prefix}{fu.insert_escape_char(filename)}"
+			dest_path = os.path.join(path.plagiarism_check_dir, new_name)
+			os.system(f"cp {src_path} {dest_path}")
+
 	# Get the list of files. Escape the space chars if necessary
 	file_args = ""
+	sample_file_args = ""
 	for filename in os.listdir(path.plagiarism_check_dir):
 		if filename[0] != '.':
-			file_args += f" {fu.insert_escape_char(filename)}"
+			if base_prefix == filename[0:len(base_prefix)]:
+				sample_file_args += f" -b {fu.insert_escape_char(filename)}"
+			else:
+				file_args += f" {fu.insert_escape_char(filename)}"
 
 	if file_args != "":
 		# Change directory to the plagiarism check directory.
 		# This is because if we include a long path, the path will be printed in the results.
 		# This keeps the plag check results much simpler.
 		os.chdir(path.plagiarism_check_dir)
-		os.system(f"../../modules/_PLACE_MOSS_HERE/moss -l java{file_args}")
+		os.system(f"../../modules/_PLACE_MOSS_HERE/moss -l java{sample_file_args}{file_args}")
 		# Change back to original directory.
 		os.chdir(path.cwd)
 

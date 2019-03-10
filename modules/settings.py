@@ -42,10 +42,15 @@ class Path:
 	plagiarism_check_dir = os.path.join(storage_dir, 'plagiarism_check')
 	# Moss file
 	moss_path = os.path.join(plagiarism_check_dir, 'moss')
+	# Plag check samples
+	# This is for files obtained online to compare the student submissions
+	# to see if they copied directly from online.
+	plag_sample_dir = os.path.join(storage_dir, '_PLACE_PLAG_CHECK_SAMLE_HERE')
 
 	# Directories for invalid submissions
 	# invalid submissions directory
 	invalid_dir = os.path.join(storage_dir, 'invalid')
+	# Invalid due to improper name
 	invalid_sub_dir = os.path.join(invalid_dir, '1_invalid_submission')
 	# unzip failure directory
 	unzip_fail_dir = os.path.join(invalid_dir, '2_unable_to_unzip')
