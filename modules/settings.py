@@ -45,7 +45,7 @@ class Path:
 	# Plag check samples
 	# This is for files obtained online to compare the student submissions
 	# to see if they copied directly from online.
-	plag_sample_dir = os.path.join(storage_dir, '_PLACE_PLAG_CHECK_SAMLE_HERE')
+	plag_sample_dir = os.path.join(storage_dir, '_PLACE_PLAG_CHECK_SAMPLE_HERE')
 
 	# Directories for invalid submissions
 	# invalid submissions directory
