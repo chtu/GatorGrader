@@ -60,7 +60,7 @@ class Path:
 	# plagiarism check folder
 	plagiarism_check_dir = os.path.join(storage_dir, 'plagiarism_check')
 	# Moss file
-	moss_path = os.path.join(base_dir, "modules", "_PLACE_MOSS_HERE", 'moss.exe')
+	moss_path = os.path.join(base_dir, "modules", "_PLACE_MOSS_HERE", 'moss')
 	# Plag check samples
 	# This is for files obtained online to compare the student submissions
 	# to see if they copied directly from online.
