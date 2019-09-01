@@ -2,3 +2,7 @@ The MOSS script goes in this folder. Stanford's makes this script available
 for free to educators, but their terms of use state that it cannot be
 posted publicly, so this folder is meant for new users to place their moss file here
 when they are ready to use it.
+
+If you would like to include plagiarism detection in your program, follow the instructions on this web page:
+https://theory.stanford.edu/~aiken/moss/
+and follow the instructions in the section labeled "Registering for Moss".
