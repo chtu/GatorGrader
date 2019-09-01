@@ -1,12 +1,15 @@
 import os
 import subprocess
-from modules.settings import Path, Settings
+from modules.settings import Path, Settings, Commands
 import modules.filename_util as fu
+import shutil
+from zipfile import ZipFile
 
 
 class SubmissionFile:
 	def __init__(self, filename, path_to_dir, main_class):
-		self.filename = fu.insert_escape_char(filename) # Name of the file, including extension
+		self.filename = filename
+
 		self.main_class = main_class
 		# Set the following as None, and then validate.
 		# If validation is successfull, these values will be pulled from the
@@ -33,13 +36,19 @@ class SubmissionFile:
 	# You don't need to specify the filename itself.
 	def move(self, new_directory_path):
 		updated_path = os.path.join(new_directory_path, self.filename)
-		os.system('mv ' + self.current_path + ' ' + updated_path)
+
+		#os.system('mv ' + self.current_path + ' ' + updated_path)
+		shutil.move(self.current_path, updated_path)
+		
 		self.current_dir = new_directory_path
 		self.current_path = updated_path
 
 	def rename(self, new_name):
 		dest_path = os.path.join(self.current_dir, new_name)
-		os.system(f"mv {self.current_path} {dest_path}")
+		
+		#os.system(f"mv {self.current_path} {dest_path}")
+		os.rename(self.current_path, dest_path)
+
 		self.filename = new_name
 		self.current_path = os.path.join(self.current_dir, self.filename)
 
@@ -55,18 +64,29 @@ class SubmissionFile:
 	def run_program(self):
 		try:
 			path_to_dir = os.path.join(Path.unzipped_dir, self.user_dir_name)
-			path_to_file = os.path.join(path_to_dir, f"{self.main_class}.class")
-			if os.path.exists(path_to_file):
-				os.system('java -cp ' + path_to_dir + ' ' + self.main_class)
+			
+			base_dir = os.getcwd()
+			os.chdir(path_to_dir)
+
+
+
+			if os.path.exists(f"{self.main_class}.class"):
+				cmd = f"{Commands.java} {self.main_class}"
+				subprocess.check_call(cmd, shell=True)
 			else:
 				print("Compilation failed.\nNo main class found.")
+
+			os.chdir(base_dir)
 		except:
-			print("Something caused the program to stop.")
+			print("\n\n\nProgram ended.")
 
 	# Display the file contents to the user.
 	def display(self):
 		path_to_dir = os.path.join(Path.unzipped_dir, self.user_dir_name)
-		os.system("cat " + os.path.join(path_to_dir, f"{self.main_class}.java"))
+		path_to_file = os.path.join(path_to_dir, f"{self.main_class}.java")
+		#os.system("cat " + os.path.join(path_to_dir, f"{self.main_class}.java"))
+		with open(os.path.join(os.path.join(path_to_file))) as f:
+			print(f.read())
 
 	# Validate the filename.
 	def validate_filename(self):
@@ -132,7 +152,25 @@ class SubmissionFile:
 	# Overwrites any existing directory.
 	def unzip(self):
 		if self.filename_is_valid():
-			subprocess.check_call(['unzip', '-j', '-o', self.current_path, '-d', os.path.join(Path.unzipped_dir, self.user_dir_name)])
+			with ZipFile(self.current_path, 'r') as zip:
+				zip_dest_path = os.path.join(Path.unzipped_dir, self.user_dir_name)
+				zip.extractall(zip_dest_path)
+
+				java_file = f"{self.main_class}.java"
+				correct_main_class_path = os.path.join(zip_dest_path, java_file)
+
+				# The main class should be placed in the first level of the user's directory. If it isn't,
+				# move the file to the correct spot.
+				if not os.path.exists(correct_main_class_path):
+					for filename in os.listdir(zip_dest_path):
+						path_to_main_file = os.path.join(zip_dest_path, filename, java_file)
+						if os.path.exists(path_to_main_file):
+							shutil.move(path_to_main_file, correct_main_class_path)
+							break
+
+
+			# Old code, delete when no longer needed
+			# subprocess.check_call(['unzip', '-j', '-o', self.current_path, '-d', os.path.join(Path.unzipped_dir, self.user_dir_name)])
 			self.unzipped = True
 
 	# Checks the validity of the Java file.

@@ -6,6 +6,7 @@ from modules.refresher import Refresher
 from modules.submission import SubmissionFile
 from modules.plagiarism_checker import perform_plagiarism_check
 import modules.filename_util as fu
+import shutil
 
 def clear_and_print_header(main_class):
 	subprocess.call('clear')
@@ -35,15 +36,14 @@ def replace_spaces_in_filename(filename):
 def replace_spaces_in_dir_files(path_to_dir):
 	new_list = []
 	for filename in remove_hidden(os.listdir(path_to_dir)):
-		old_name = fu.insert_escape_char(filename)
-		if filename != old_name:
-			old_name_path = os.path.join(path_to_dir, old_name)
-			new_name = replace_spaces_in_filename(filename)
-			new_name_path = os.path.join(path_to_dir, new_name)
-			os.system(f"mv {old_name_path} {new_name_path}")
-			new_list.append(new_name)
-		else:
-			new_list.append(filename)
+		filename_path = os.path.join(path_to_dir, filename)
+		new_name = replace_spaces_in_filename(filename)
+
+		new_list.append(new_name)
+		new_name_path = os.path.join(path_to_dir, new_name)
+
+		os.rename(filename_path, new_name_path)
+
 	return new_list
 
 def run_student_submission(sub):
@@ -159,7 +159,7 @@ class EvaluatorProgram:
 						print(f"Validating {i+1} out of {len(all_submissions)} submissions.")
 						print(Design.border4)
 						Validator.validate(submission, path, main_class)
-						os.system(f"rm -rf {all_submissions[i][1]}")
+						shutil.rmtree(all_submissions[i][1])
 					break
 				elif response == "N" or response == "n":
 					break
@@ -246,7 +246,6 @@ class EvaluatorProgram:
 				print("Performing a plagiarism check with Stanford's MOSS tool.")
 				print(Design.border4)
 				perform_plagiarism_check(main_class)
-				print("Use the link above to view the results of the MOSS tool.")
 				print(Design.border2)
 				print("\nPress ENTER to return to the menu.")
 				input()

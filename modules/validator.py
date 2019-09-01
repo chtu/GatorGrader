@@ -1,8 +1,9 @@
 import os
 import subprocess
-from modules.settings import Path, Settings as settings
+from modules.settings import Path, Settings as settings, Commands
 from modules.submission import SubmissionFile
 import modules.filename_util as fu
+from zipfile import ZipFile
 
 
 def remove_file_if_exists(submission_file):
@@ -14,7 +15,8 @@ def remove_file_if_exists(submission_file):
 		for filename in os.listdir(folder_path):
 			if submission_file == filename:
 				file_path = os.path.join(folder_path, submission_file)
-				os.system(f"rm {file_path}")
+				# os.system(f"rm {file_path}")
+				os.remove(file_path)
 				found = True
 				break
 		if found:
@@ -38,8 +40,7 @@ class Validator:
 					break
 				except:
 					student_name += f"_{ilearn_sub_dir_parts[i]}"
-			new_filename = f"{fu.insert_escape_char(student_name)}__INCORRECT__{sub.filename}"
-			sub.rename(new_filename)
+					new_filename = f"{student_name}__INCORRECT__{sub.filename}"
 			sub.move(Path.invalid_sub_dir)
 			return
 
@@ -61,7 +62,9 @@ class Validator:
 		compile_info_filename = "compile_info.txt"
 		compile_info_path = os.path.join(user_dir, compile_info_filename)
 		try:
-			subprocess.check_call(['javac', java_file_path, '-d', user_dir])
+			#subprocess.check_call(['javac', java_file_path, '-d', user_dir])
+			subprocess.check_call([Commands.javac, java_file_path, '-d', user_dir])
+
 			os.system(f'echo "Compilation successful." > {compile_info_path}')
 			# Check to make sure there wasn't a package statement in the java
 			# file. If not, then move to invalid and return
@@ -78,8 +81,9 @@ class Validator:
 		except Exception as e:
 			# Error occurred during compilation. Send to invalid
 			sub.move(Path.non_compilable_dir)
-			os.system(f'echo "Compilation failed." > {compile_info_path}')
-
+			#os.system(f'echo "Compilation failed." > {compile_info_path}'
+			with open(compile_info_path, "a+") as f:
+				f.write("Compilation failed.\n%s" % (str(e)))
 			return
 
 		# If the program reaches this point, then that means the submission

@@ -8,6 +8,10 @@ import subprocess
 # The main class for this assignment
 
 
+# Current working directory
+cwd = os.getcwd()
+
+
 class Settings:
 	# Set this main class
 	main_class = 'MainClass'
@@ -19,8 +23,9 @@ class Settings:
 	placeholder = "placeholder.txt"
 
 class Path:
-	# Current working directory
-	cwd = os.getcwd()
+	# base directory
+	base_dir = cwd
+
 	# Storage directory
 	storage_dir = os.path.join(cwd, 'storage')
 	# Files working directory
@@ -41,7 +46,7 @@ class Path:
 	# plagiarism check folder
 	plagiarism_check_dir = os.path.join(storage_dir, 'plagiarism_check')
 	# Moss file
-	moss_path = os.path.join(plagiarism_check_dir, 'moss')
+	moss_path = os.path.join(base_dir, "modules", "_PLACE_MOSS_HERE", 'moss')
 	# Plag check samples
 	# This is for files obtained online to compare the student submissions
 	# to see if they copied directly from online.
@@ -64,10 +69,24 @@ class Path:
 	# Test files
 	test_files_dir = os.path.join(storage_dir, "test_files")
 
+
 	# All storage directories
 	storage_directories = [invalid_dir, valid_sub_dir, valid_checked_dir, valid_checked_graded_dir,
 		unzipped_dir, plagiarism_check_dir, invalid_sub_dir, unzip_fail_dir,
 		invalid_java_file_dir, non_compilable_dir, package_statement_dir]
+
+
+
+class Commands:
+	# JDK
+	jdk_bin = os.path.join(cwd, "modules", "jdk", "jdk-12.0.2", "bin")
+
+	# java command
+	java = os.path.join(jdk_bin, "java")
+
+	# javac command
+	javac = os.path.join(jdk_bin, "javac")
+
 
 class Design:
 	border1 =  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
