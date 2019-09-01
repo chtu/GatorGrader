@@ -6,7 +6,6 @@ The GatorGrader tool can do the following:
 
 ## Requirements
 * Python 3
-* (Minimum) Java 8. It should be able to compile and run in the command line.
 * For now, Linux or Mac OS, but I believe it can be easily modified for Windows.
 
 ## How to use GatorGrader
@@ -27,3 +26,7 @@ GatorGrader is a simple program that stores the data in filesystem, not a databa
 ## Contributing to GatorGrader
 If you would like to help improve this tool, let me know and I'd be happy to add you as a contributor as long as you work at SFSU. I created a bunch of test files that you can use to make sure it's working properly. Test the program by calling:  
 ```python3 test.py```
+
+## Updates
+
+* 2019-09-01 --- The program was updated to include the JDK in the project, so you no longer need to download the JDK for the program to run the student submissions.
