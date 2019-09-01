@@ -1,5 +1,6 @@
 import os
 import subprocess
+import sys
 
 
 # INSTRUCTIONS: Set the main class for this assignment.
@@ -16,11 +17,24 @@ class Settings:
 	# Set this main class
 	main_class = 'MainClass'
 
-
-
-
 	#placeholder file for git
 	placeholder = "placeholder.txt"
+
+	def get_platform():
+		# Constants for operating systems
+		linux = "linux"
+		osx = 'mac'
+		windows = 'windows'
+
+		platforms = {
+			'linux1' : linux,
+			'linux2' : linux,
+			'darwin' : osx,
+			'win32' : windows
+		}
+		if sys.platform not in platforms:
+			return sys.platform
+		return platforms[sys.platform]
 
 class Path:
 	# base directory
@@ -46,7 +60,7 @@ class Path:
 	# plagiarism check folder
 	plagiarism_check_dir = os.path.join(storage_dir, 'plagiarism_check')
 	# Moss file
-	moss_path = os.path.join(base_dir, "modules", "_PLACE_MOSS_HERE", 'moss')
+	moss_path = os.path.join(base_dir, "modules", "_PLACE_MOSS_HERE", 'moss.exe')
 	# Plag check samples
 	# This is for files obtained online to compare the student submissions
 	# to see if they copied directly from online.
@@ -79,7 +93,7 @@ class Path:
 
 class Commands:
 	# JDK
-	jdk_bin = os.path.join(cwd, "modules", "jdk", "jdk-12.0.2", "bin")
+	jdk_bin = os.path.join(cwd, "modules", "jdk", Settings.get_platform(), "jdk-12.0.2", "bin")
 
 	# java command
 	java = os.path.join(jdk_bin, "java")

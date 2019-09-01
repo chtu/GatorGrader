@@ -61,11 +61,13 @@ class Validator:
 		java_file_path = os.path.join(user_dir, f"{main_class}.java")
 		compile_info_filename = "compile_info.txt"
 		compile_info_path = os.path.join(user_dir, compile_info_filename)
+		message = "Starting."
 		try:
-			#subprocess.check_call(['javac', java_file_path, '-d', user_dir])
 			subprocess.check_call([Commands.javac, java_file_path, '-d', user_dir])
+			message += "\nCompilation success."
 
-			os.system(f'echo "Compilation successful." > {compile_info_path}')
+			with open(compile_info_path, "a+") as f:
+				f.write("Compilatin successful.")
 			# Check to make sure there wasn't a package statement in the java
 			# file. If not, then move to invalid and return
 			class_file = f"{main_class}.class"
@@ -83,7 +85,7 @@ class Validator:
 			sub.move(Path.non_compilable_dir)
 			#os.system(f'echo "Compilation failed." > {compile_info_path}'
 			with open(compile_info_path, "a+") as f:
-				f.write("Compilation failed.\n%s" % (str(e)))
+				f.write(f"Compilation failed.\n{message}\n{str(e)}")
 			return
 
 		# If the program reaches this point, then that means the submission

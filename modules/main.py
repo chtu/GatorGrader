@@ -8,8 +8,15 @@ from modules.plagiarism_checker import perform_plagiarism_check
 import modules.filename_util as fu
 import shutil
 
+def clear():
+	# Windows
+	if os.name == 'nt':
+		os.system('cls')
+	else:
+		os.system('clear')
+
 def clear_and_print_header(main_class):
-	subprocess.call('clear')
+	clear()
 	print_header(main_class)
 
 def print_header(main_class):
@@ -275,7 +282,7 @@ class EvaluatorProgram:
 						continue
 			'''
 			elif command == "0":
-				subprocess.call('clear')
+				clear()
 				break
 			else:
 				clear_and_print_header(main_class)
