@@ -28,4 +28,4 @@ If you would like to help improve this tool, let me know and I'd be happy to add
 
 ## Updates
 
-* 2019-09-01 --- The program was updated to include the JDK in the project, so you no longer need to download the JDK for the program to run the student submissions.
+* (2019-09-01) The program was updated to include the JDK in the project, so you no longer need to download the JDK for the program to run the student submissions. This will work on Mac, Windows, and Linux operating systems. Code was also modified to work on Windows, so Windows users will now be able to run the program. However, MOSS (the plagiarism detection software) is only available on Mac and Linux.
