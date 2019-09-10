@@ -125,7 +125,7 @@ class EvaluatorProgram:
 	def run(main_class):
 		main_java_file = main_class + ".java"
 		clear_and_print_header(main_class)
-		print("Beginning program.")
+		print(f"Beginning program on a {Settings.get_platform()} platform.")
 		fu.init_storage_dirs()
 		print(Design.border4)
 

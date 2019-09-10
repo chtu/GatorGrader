@@ -10,6 +10,11 @@ _PLACE_SUBMISSIONS_HERE/
 storage/
 !placeholder.txt
 
+# JDK directories
+jdk-12.0.2
+jdk-12.0.2.jdk
+
+
 # Moss file.
 # Stanford terms state that moss script cannot be made publicly available,
 # so it is ignored by git. People who use this program must get their own
