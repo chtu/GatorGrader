@@ -34,6 +34,9 @@ class Validator:
 			parts = path_to_dir.split('/')
 			ilearn_sub_dir_parts = parts[len(parts)-1].split('_')
 			student_name = ilearn_sub_dir_parts[0]
+
+			# Check each part of the automatically generated iLearn submission folder
+			# to get the name of the student
 			for i in range(1, len(ilearn_sub_dir_parts)):
 				try:
 					int(ilearn_sub_dir_parts[i])
@@ -41,6 +44,7 @@ class Validator:
 				except:
 					student_name += f"_{ilearn_sub_dir_parts[i]}"
 					new_filename = f"{student_name}__INCORRECT__{sub.filename}"
+					sub.rename(new_filename)
 			sub.move(Path.invalid_sub_dir)
 			return
 
