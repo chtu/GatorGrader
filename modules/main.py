@@ -91,6 +91,7 @@ def print_emails(path_to_directory, main_class):
 
 			if int(sub.id_number) == id_number:
 				print(f"{email}")
+				break
 	print("\n")
 
 
@@ -127,6 +128,7 @@ def print_emails_using_name(path_to_directory, main_class):
 
 			if last_name == csv_ln and first_name == csv_fn:
 				print(f"{email}")
+				break
 	print("\n")
 
 
@@ -178,6 +180,12 @@ def print_invalid_submissions(main_class):
 	print("The following submissions were invalid because they failed to compile.\n")
 	print_submission_file_info(Path.non_compilable_dir, main_class)
 	print_emails(Path.non_compilable_dir, main_class)
+	print(Design.border3)
+
+
+	print("STUDENT EMAILS WITH VALID SUBMISSIONS")
+	print(Design.border4)
+	print_emails(Path.valid_checked_dir, main_class)
 	print(Design.border3)
 
 
