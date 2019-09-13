@@ -52,6 +52,11 @@ class Path:
 	fwd = os.path.join(cwd, 'files')
 	# Main java file
 	main_java_file = "%s.java" % Settings.main_class
+	# Emails dir
+	emails = os.path.join(base_dir, "_PLACE_EMAILS_HERE")
+	emails_file = os.path.join(emails, "emails.csv")
+	test_emails_file = os.path.join(emails, "test_emails.csv")
+
 
 	# initial submissions directory
 	initial_sub_dir = os.path.join(cwd, '_PLACE_SUBMISSIONS_HERE')

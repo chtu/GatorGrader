@@ -1,0 +1,27 @@
+Username,"Last name","First name","Email address","Last downloaded from this course"
+123123123,Digit,Extra,extradigit@test.com,1568404253
+123123123,"file name",Extra,extrafilename@test.com,1568404253
+123123123,WithLetter,IdNumber,idnumwithlet@test.com,1568404253
+123123123,Digit,OneLess,onelessdigit@test.com,1568404253
+123123123,Test,SingleName,singlename@test.com,1568404253
+123123123,WithSpace1,ZipFile,zipfilespace1@test.com,1568404253
+123123123,WithSpace2,ZipFile,zipfilespace2@test.com,1568404253
+123123123,WithSpace3,ZipFile,zipfilespace3@test.com,1568404253
+123123123,WithSpace4,ZipFile,zipfilespace4@test.com,1568404253
+123123123,"JavaFile WithBadName1",ZippedOnly,zipwithbadname1@test.com,1568404253
+123123123,"JavaFile WithBadName2",ZippedOnly,zipwithbadname2@test.com,1568404253
+757575759,PackageStatement,Has,HasPackageStatement@test.com,1568404253
+234204234,Two,NoErrors,NoErrorsTwo@test.com,1568404253
+555333222,FileExtension,Wrong,WrongFileExtension@test.com,1568404253
+911835942,Four,NoErrors,NoErrorsFour@test.com,1568404253
+101101101,FileName,Wrong,WrongFileName@test.com,1568404253
+777778987,RuntimeError,GoodWith,GoodWithRuntimeError@test.com,1568404253
+888888888,Two,CompileError,CompileErrorTwo@test.com,1568404253
+123765345,ZipFile,NotActual,NotActualZipFile@test.com,1568404253
+757775757,Three,NoErrors,NoErrorsThree@test.com,1568404253
+666696645,LowerCaseClass,GoodJavaName,GoodJavaNameLowerCaseClass@test.com,1568404253
+666666645,LowerCaseClass,LowerCaseName,LowerCaseNameLowerCaseClass@test.com,1568404253
+223322332,"JavaFile WithGoodName",ZippedOnly,ZippedOnlyJavaFileWithGoodName@test.com,1568404253
+666777888,WithSpace,JavaFile,JavaFileWithSpace@test.com,1568404253
+777797777,One,CompileError,CompileErrorOne@test.com,1568404253
+124451234,One,NoErrors,NoErrorsOne@test.com,1568404253

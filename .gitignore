@@ -7,8 +7,11 @@ __pycache__/
 .DS_STORE
 
 _PLACE_SUBMISSIONS_HERE/
+!placeholder.txt
 storage/
 !placeholder.txt
+
+emails.csv
 
 # JDK directories
 jdk-12.0.2

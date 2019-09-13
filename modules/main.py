@@ -72,6 +72,65 @@ def print_submission_file_info(path_to_directory, main_class):
 		sub = SubmissionFile(filenames[i], os.path.join(path_to_directory, filenames[i]), main_class)
 		print (f"  {i+1}. ({sub.id_number}) {sub.first_name} {sub.last_name}")
 
+def print_emails(path_to_directory, main_class):
+	print("\nEMAILS:\n")
+	filenames = remove_hidden(os.listdir(path_to_directory))
+	if main_class == 'Test':
+		emails_csv = open(Path.test_emails_file, "r")
+	else:
+		emails_csv = open(Path.emails_file, "r")
+	rows = emails_csv.readlines()
+	emails_csv.close()
+
+	for i in range(0, len(filenames)):
+		sub = SubmissionFile(filenames[i], os.path.join(path_to_directory, filenames[i]), main_class)
+		for i in range(1, len(rows)):
+			row = rows[i]
+			id_number = int(row.split(",")[0])
+			email = row.split(",")[3]
+
+			if int(sub.id_number) == id_number:
+				print(f"{email}")
+	print("\n")
+
+
+def print_emails_using_name(path_to_directory, main_class):
+	print("\nEMAILS:\n")
+	filenames = remove_hidden(os.listdir(path_to_directory))
+	if main_class == 'Test':
+		emails_csv = open(Path.test_emails_file, "r")
+	else:
+		emails_csv = open(Path.emails_file, "r")
+	rows = emails_csv.readlines()
+	emails_csv.close()
+
+	for i in range(0, len(filenames)):
+		filename_parts = filenames[i].split("__INCORRECT__")
+		names = filename_parts[0].split("_")
+		first_name = names[0]
+
+		if len(names) == 2:
+			last_name = names[1]
+		else:
+			last_name = f"\"{names[1]}"
+
+			for i in range(2, len(names)):
+				last_name += f" {names[i]}"
+			last_name += "\""
+
+
+		for i in range(1, len(rows)):
+			row = rows[i].split(",")
+			csv_fn = row[2]
+			csv_ln = row[1]
+			email = row[3]
+
+			if last_name == csv_ln and first_name == csv_fn:
+				print(f"{email}")
+	print("\n")
+
+
+
 def print_invalid_submissions(main_class):
 	print("Displaying submissions that were deemed invalid.")
 	print(Design.border3)
@@ -85,6 +144,7 @@ def print_invalid_submissions(main_class):
 	invalid_submission_files = remove_hidden(os.listdir(Path.invalid_sub_dir))
 	for i in range(0, len(invalid_submission_files)):
 		print(f"  {i+1}. {invalid_submission_files[i]}")
+	print_emails_using_name(Path.invalid_sub_dir, main_class)
 	print(Design.border3)
 
 	print("INVALID ZIP FILE")
@@ -93,6 +153,7 @@ def print_invalid_submissions(main_class):
 	print("This could likely be due to the file not actual being a zip file, or there")
 	print("might be something wrong with the permissions attached to the file.\n")
 	print_submission_file_info(Path.unzip_fail_dir, main_class)
+	print_emails(Path.unzip_fail_dir, main_class)
 	print(Design.border3)
 
 	print("INVALID JAVA FILE")
@@ -101,6 +162,7 @@ def print_invalid_submissions(main_class):
 	print("  - The Java file was not given the name instructed by the assignment.")
 	print("  - The student didn't submit a Java file.\n")
 	print_submission_file_info(Path.invalid_java_file_dir, main_class)
+	print_emails(Path.invalid_java_file_dir, main_class)
 	print(Design.border3)
 
 	print("JAVA FILES WITH PACKAGE STATEMENTS")
@@ -108,12 +170,14 @@ def print_invalid_submissions(main_class):
 	print("The following submissions were invalid due to one or more of the following reasons:")
 	print("  - The Java file included a package statement when it wasn't supposed to.\n")
 	print_submission_file_info(Path.package_statement_dir, main_class)
+	print_emails(Path.package_statement_dir, main_class)
 	print(Design.border3)
 
 	print("FAILED TO COMPILE")
 	print(Design.border4)
 	print("The following submissions were invalid because they failed to compile.\n")
 	print_submission_file_info(Path.non_compilable_dir, main_class)
+	print_emails(Path.non_compilable_dir, main_class)
 	print(Design.border3)
 
 
