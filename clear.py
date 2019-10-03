@@ -21,6 +21,8 @@ def clear_files_from_dir(dir):
 
 def clear_initial_dir():
 	for folder in os.listdir(path.initial_sub_dir):
+		if folder[0] == ".":
+			continue
 		if folder != settings.placeholder:
 			os.system(f"rm -rf {os.path.join(path.initial_sub_dir, folder)}")
 

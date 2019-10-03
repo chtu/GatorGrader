@@ -36,6 +36,8 @@ def copy_to_initial_dir(dir):
 
 def clear_initial_dir():
 	for folder in os.listdir(path.initial_sub_dir):
+		if folder[0] == ".":
+			continue
 		if folder != settings.placeholder:
 			shutil.rmtree(os.path.join(path.initial_sub_dir, folder))
 
