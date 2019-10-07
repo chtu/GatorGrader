@@ -54,6 +54,9 @@ def clear_directories():
 
 def clear_plag_dir():
 	for filename in os.listdir(path.plagiarism_check_dir):
+		if filename[0] == ".":
+			continue
+
 		if filename != 'moss':
 			dir_path = os.path.join(path.plagiarism_check_dir, filename)
 			
@@ -62,6 +65,9 @@ def clear_plag_dir():
 
 def clear_submission_dir():
 	for filename in os.listdir(path.initial_sub_dir):
+		if folder[0] == ".":
+			continue
+
 		if filename != settings.placeholder:
 			shutil.rmtree(os.path.join(path.initial_sub_dir, filename))
 
