@@ -55,7 +55,7 @@ def clear_directories():
 
 def clear_plag_dir():
 	for filename in os.listdir(path.plagiarism_check_dir):
-		if folder[0] == ".":
+		if filename[0] == ".":
 			continue
 
 		if filename != 'moss':
