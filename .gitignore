@@ -16,6 +16,8 @@ emails.csv
 # JDK directories
 jdk-12.0.2
 jdk-12.0.2.jdk
+jdk-11.0.2
+jdk-11.0.2.jdk
 
 
 # Moss file.
