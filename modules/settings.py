@@ -38,9 +38,18 @@ class Settings:
 
 	def get_jdk_path():
 		if Settings.get_platform() == "linux" or Settings.get_platform() == "windows":
-			return os.path.join(cwd, "modules", "jdk", Settings.get_platform(), "jdk-12.0.2", "bin")
+			jdk_12_path = os.path.join(cwd, "modules", "jdk", Settings.get_platform(), "jdk-12.0.2", "bin")
+			jdk_11_path = os.path.join(cwd, "modules", "jdk", Settings.get_platform(), "jdk-11.0.2", "bin")
 		elif Settings.get_platform() == "mac":
-			return os.path.join(cwd, "modules", "jdk", "mac", "jdk-12.0.2.jdk", "Contents", "Home", "bin")
+			jdk_12_path = os.path.join(cwd, "modules", "jdk", "mac", "jdk-12.0.2.jdk", "Contents", "Home", "bin")
+			jdk_11_path = os.path.join(cwd, "modules", "jdk", "mac", "jdk-11.0.2.jdk", "Contents", "Home", "bin")
+
+		if os.path.exists(jdk_12_path):
+			jdk_path = jdk_12_path
+		elif os.path.exists(jdk_11_path):
+			jdk_path = jdk_11_path
+
+		return jdk_path
 
 class Path:
 	# base directory
