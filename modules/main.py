@@ -202,8 +202,10 @@ class EvaluatorProgram:
 		if not os.path.exists(Commands.java) or not os.path.exists(Commands.javac):
 			print("\n\nIt looks like you don't have a JDK installed yet.")
 			print("Please download the JDK from this website: https://jdk.java.net/12/")
-			print("Once you do so, unpack the JDK into the modules/jdk/<your os> directory.")
+			print("Once you do so, unpack the JDK into the modules/jdk/ directory.")
 			print("You can find instructions for your OS in modules/jdk/<your os>/README.md")
+			print()
+			print("If you have downloaded the JDK, then make sure you placed t")
 
 		else:
 			fu.init_storage_dirs()

@@ -37,17 +37,27 @@ class Settings:
 		return platforms[sys.platform]
 
 	def get_jdk_path():
+		'''
 		if Settings.get_platform() == "linux" or Settings.get_platform() == "windows":
-			jdk_12_path = os.path.join(cwd, "modules", "jdk", Settings.get_platform(), "jdk-12.0.2", "bin")
+			jdk_folder_path = os.path.join(cwd, "modules", "jdk", Settings.get_platform(), "jdk-12.0.2", "bin")
 			jdk_11_path = os.path.join(cwd, "modules", "jdk", Settings.get_platform(), "jdk-11.0.2", "bin")
 		elif Settings.get_platform() == "mac":
 			jdk_12_path = os.path.join(cwd, "modules", "jdk", "mac", "jdk-12.0.2.jdk", "Contents", "Home", "bin")
 			jdk_11_path = os.path.join(cwd, "modules", "jdk", "mac", "jdk-11.0.2.jdk", "Contents", "Home", "bin")
+'''
+		system_dir_path = os.path.join(cwd, "modules", "_PLACE_JDK_HERE")
 
-		if os.path.exists(jdk_12_path):
-			jdk_path = jdk_12_path
-		elif os.path.exists(jdk_11_path):
-			jdk_path = jdk_11_path
+		jdk_path = None
+
+		for folder_name in os.listdir(system_dir_path):
+			if folder_name[0:3] == "jdk":
+				jdk_path = os.path.join(system_dir_path, folder_name)
+				break
+
+		if Settings.get_platform() == "linux" or Settings.get_platform() == "windows":
+			jdk_path = os.path.join(jdk_path, "bin")
+		elif Settings.get_platform() == "mac":
+			jdk_path = os.path.join(jdk_path, "Contents", "Home", "bin")
 
 		return jdk_path
 
