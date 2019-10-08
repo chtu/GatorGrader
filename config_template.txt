@@ -1,0 +1,23 @@
+'''
+READ THESE INSTRUCTIONS. THIS IS A TEMPLATE, NOT THE ACTUAL CONFIG FILE.
+When you are setting up the repo on your machine for the first time, you should
+copy the contents of this file into a new file called config.py. Make sure
+config.py is placed in the root directory of this project.
+
+You can delete this comment once you are done. The project will refer to
+config.py for certain settings.
+'''
+
+'''
+
+This is the config file, which contains settings that you use in specifically your project.
+This file is not tracked by git, so it will not be affected by pulling any changes in the
+project.
+
+'''
+
+# SET THIS MAIN CLASS
+# All assignments will list the required main class for the project.
+# For the project to run properly, this variable should be set to the
+# main class required by the assignment you're grading.
+main_class = "Set this string value to the main class"

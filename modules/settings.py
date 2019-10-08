@@ -2,6 +2,10 @@ import os
 import subprocess
 import sys
 
+sys.path.append("..")
+
+from config import main_class as mc
+
 
 # INSTRUCTIONS: Set the main class for this assignment.
 # If students submit a Java file that has a different file and/or main class name,
@@ -15,7 +19,7 @@ cwd = os.getcwd()
 
 class Settings:
 	# Set this main class
-	main_class = 'MainClass'
+	main_class = mc
 
 	#placeholder file for git
 	placeholder = "placeholder.txt"
