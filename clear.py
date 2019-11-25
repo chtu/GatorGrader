@@ -4,6 +4,8 @@ import subprocess
 from modules.main import EvaluatorProgram as evaluator
 from modules.settings import Path as path, Settings as settings
 import modules.filename_util as fu
+import shutil
+
 
 def clear_folders_from_dir(dir):
 	for folder_name in os.listdir(dir):
@@ -76,4 +78,4 @@ fu.init_storage_dirs()
 
 clear_directories()
 clear_plag_dir()
-print("Directories cleared")
+print("Directories cleared.")
