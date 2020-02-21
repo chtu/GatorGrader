@@ -119,7 +119,7 @@ def print_emails_using_name(path_to_directory, main_class):
 				last_name += f" {names[i]}"
 			last_name += "\""
 
-
+		found = False
 		for i in range(1, len(rows)):
 			row = rows[i].split(",")
 			csv_fn = row[2]
@@ -127,8 +127,11 @@ def print_emails_using_name(path_to_directory, main_class):
 			email = row[3]
 
 			if last_name == csv_ln and first_name == csv_fn:
+				found = True
 				print(f"{email}")
 				break
+		if not found:
+			print(f"No email for {first_name} {last_name}")
 	print("\n")
 
 
