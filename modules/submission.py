@@ -18,7 +18,7 @@ class SubmissionFile:
 		self.last_name = None
 		self.id_number = None
 		self.user_dir_name = None
-		self.validate_filename()
+		self.validate_filename(path_to_dir)
 
 		self.column_width = 50
 		self.current_dir = path_to_dir
@@ -89,7 +89,7 @@ class SubmissionFile:
 			print(f.read())
 
 	# Validate the filename.
-	def validate_filename(self):
+	def validate_filename(self, path_to_dir):
 		submission_file_parts = self.filename.split('.')
 		if len(submission_file_parts) != 2: # If more than 2 periods.
 			return False
@@ -104,6 +104,15 @@ class SubmissionFile:
 		firstname = filename_parts[0]
 		lastname = filename_parts[1]
 		str_id_number = filename_parts[2]
+
+		# Check if space in the ID number
+		if " " in str_id_number:
+			old_path = os.path.join(path_to_dir, self.filename)
+			str_id_number = str_id_number.split(" ")[0]
+			new_filename = f"{firstname}_{lastname}_{str_id_number}.zip"
+			new_path = os.path.join(path_to_dir, new_filename)
+			os.rename(old_path, new_path)
+			self.filename = new_filename
 
 		if len(str_id_number) != 9: # If id_num is not 9 characters
 			return False
@@ -120,6 +129,7 @@ class SubmissionFile:
 			return False
 		except:
 			success = True
+
 		# Check if the ID number is actually a number.
 		try:
 			id_number = int(str_id_number)
