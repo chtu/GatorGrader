@@ -24,7 +24,7 @@ class Settings:
 	#placeholder file for git
 	placeholder = "placeholder.txt"
 
-	def get_platform():
+	def get_platform(self):
 		# Constants for operating systems
 		linux = "linux"
 		osx = 'mac'
@@ -40,7 +40,7 @@ class Settings:
 			return sys.platform
 		return platforms[sys.platform]
 
-	def get_jdk_path():
+	def get_jdk_path(self):
 		'''
 		if Settings.get_platform() == "linux" or Settings.get_platform() == "windows":
 			jdk_folder_path = os.path.join(cwd, "modules", "jdk", Settings.get_platform(), "jdk-12.0.2", "bin")
@@ -58,9 +58,9 @@ class Settings:
 				jdk_path = os.path.join(system_dir_path, folder_name)
 				break
 
-		if Settings.get_platform() == "linux" or Settings.get_platform() == "windows":
+		if self.get_platform() == "linux" or self.get_platform() == "windows":
 			jdk_path = os.path.join(jdk_path, "bin")
-		elif Settings.get_platform() == "mac":
+		elif self.get_platform() == "mac":
 			jdk_path = os.path.join(jdk_path, "Contents", "Home", "bin")
 
 		return jdk_path
@@ -127,7 +127,8 @@ class Path:
 
 class Commands:
 	# JDK
-	jdk_bin = Settings.get_jdk_path()
+	settings = Settings()
+	jdk_bin = settings.get_jdk_path()
 
 	# java command
 	java = os.path.join(jdk_bin, "java")

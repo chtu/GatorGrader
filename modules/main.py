@@ -202,9 +202,10 @@ def print_invalid_submissions(main_class):
 
 class EvaluatorProgram:
 	def run(main_class):
+		settings = Settings()
 		main_java_file = main_class + ".java"
 		clear_and_print_header(main_class)
-		print(f"Beginning program on a {Settings.get_platform()} platform.")
+		print(f"Beginning program on a {settings.get_platform()} platform.")
 
 		if not os.path.exists(Commands.java) or not os.path.exists(Commands.javac):
 			print("\n\nIt looks like you don't have a JDK installed yet.")
@@ -352,11 +353,9 @@ class EvaluatorProgram:
 					while True:
 						print("Enter the ID number of the user whose project you want to examine.")
 						str_input = input("Student's ID: ")
-
 						if len(str_input) != 9:
 							print("Please enter a valid ID number.")
 							continue
-
 						try:
 							id_number = (int)str_input
 							if id_number < 100000000 or id_number > 999999999:
