@@ -23,6 +23,7 @@ def perform_plagiarism_check(main_class):
 				if filename_parts[1] == "java":
 					src_path = os.path.join(path.unzipped_dir, folder, filename)
 					new_name = f"{folder}_{filename}"
+					new_name = fu.remove_spaces(new_name)
 					dest_path = os.path.join(path.plagiarism_check_dir, new_name)
 					
 
@@ -38,6 +39,8 @@ def perform_plagiarism_check(main_class):
 		if filename_parts[1] == "java":
 			src_path = os.path.join(path.plag_sample_dir, filename)
 			new_name = f"{base_prefix}{filename}"
+			new_name = fu.remove_spaces(new_name)
+			print(new_name)
 			dest_path = os.path.join(path.plagiarism_check_dir, new_name)
 			
 

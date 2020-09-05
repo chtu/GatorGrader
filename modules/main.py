@@ -84,6 +84,7 @@ def print_emails(path_to_directory, main_class):
 
 	for i in range(0, len(filenames)):
 		sub = SubmissionFile(filenames[i], os.path.join(path_to_directory, filenames[i]), main_class)
+		found = False
 		for i in range(1, len(rows)):
 			row = rows[i]
 			id_number = int(row.split(",")[0])
@@ -91,7 +92,10 @@ def print_emails(path_to_directory, main_class):
 
 			if int(sub.id_number) == id_number:
 				print(f"{email}")
+				found = True
 				break
+		if not found:
+			print(f"No email found for {sub.first_name} {sub.last_name}")
 	print("\n")
 
 
